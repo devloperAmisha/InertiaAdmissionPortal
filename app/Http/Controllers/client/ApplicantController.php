@@ -45,7 +45,7 @@ class ApplicantController extends Controller
                 $applicant = Applicant::create($basicValidated);
             });
 
-            return redirect('/')->with('success', 'Account created successfully.');
+            return redirect('/')->with('success', 'Your Account was created successfully.');
         }
         catch(\Exception $e){
             return redirect()->back()->with('error', 'Something went wrong! Please try again later.');
