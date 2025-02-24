@@ -27,14 +27,13 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             if(Auth::user()->role->name == 'admin'){
-                return redirect('/admin/dashboard');
+                return redirect()->intended('/admin/dashboard');
             }
             if(Auth::user()->role->name == 'user'){
-                return redirect('/user/dashboard');
+                return redirect()->intended('/user/dashboard');
             }
-            return redirect()->intended('/');
+            return redirect()->intended('/applicant/dashboard');
         }
-
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');

@@ -20,7 +20,14 @@ Route::prefix('auth')->group(function(){
 Route::get('/apply', [App\Http\Controllers\Client\ApplicantController::class, 'index'])->name('apply');
 Route::post('/apply', [App\Http\Controllers\Client\ApplicantController::class, 'store'])->name('apply');
 
+//Applicant ROUTES
+Route::prefix('applicant')->middleware(['auth', 'role:applicant'])->group(function(){
+    Route::get('/dashboard', [App\Http\Controllers\Client\ApplicantController::class, 'dashboard'])->name('dashboard');
+     Route::get('/profile/edit/{applicant}', [App\Http\Controllers\Client\ApplicantController::class, 'edit'])->name('applicant.profile.edit');
 
+     Route::post('/profile/edit/{applicant}', [App\Http\Controllers\Client\ApplicantController::class, 'update'])->name('applicant.profile.update');
+
+});
 
 // ADMIN ROUTES
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
